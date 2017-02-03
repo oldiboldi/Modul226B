@@ -18,7 +18,7 @@ public class TeacherDB extends Database {
 
 	@Override
 	void initializeDirectories() {
-		loginFile = new File("D:/Hausaufgabenerfassung/tut-logins.csv");
+		loginFile = new File("./db/tut-logins.csv");
 		if (!loginFile.exists()) {
 			try {
 				loginFile.createNewFile();

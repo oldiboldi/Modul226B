@@ -23,7 +23,7 @@ public class StudentDB extends Database {
 
 	@Override
 	void initializeDirectories() {
-		loginFile = new File("D:/Hausaufgabenerfassung/stu-logins.csv");
+		loginFile = new File("./db/stu-logins.csv");
 		if (!loginFile.exists()) {
 			try {
 				loginFile.createNewFile();
@@ -42,7 +42,7 @@ public class StudentDB extends Database {
 
 		try {
 
-			br = new BufferedReader(new FileReader("D:/Hausaufgabenerfassung/stu-logins.csv"));
+			br = new BufferedReader(new FileReader("./db/stu-logins.csv"));
 			while ((line = br.readLine()) != null) {
 
 				String[] userData = line.split(";");
