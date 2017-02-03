@@ -1,6 +1,13 @@
-package view.Menu;
+package view;
 
 public class TeacherMenu extends Menu implements MenuInterface{
+	
+private String username;
+	
+	public TeacherMenu(String username) {
+		this.username = username;
+		showOptionsStart();
+	}
 
 	public int showOptionsStart() {
 		System.out.println(	

@@ -1,7 +1,14 @@
-package view.Menu;
+package view;
 
 public class StudentMenu extends Menu implements MenuInterface{
-
+	
+	private String username;
+	
+	public StudentMenu(String username) {
+		this.username = username;
+		showOptionsStart();
+	}
+	
 	@Override
 	public int showOptionsStart() {
 		System.out.println(	
