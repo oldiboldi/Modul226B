@@ -1,6 +1,5 @@
-package view.Menu;
+package view;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
@@ -25,14 +24,16 @@ public class Menu {
 	}
 	
 	public void welcomeMessageStart() {
-		System.out.println(
-				"Its " + 
-				LocalDate.now().getDayOfWeek().name().toLowerCase() +
-				" the " +
-				LocalDate.now().getDayOfMonth() +
-				". of " +
-				LocalDate.now().getMonth() +
-				"\n"
-				);
+//		System.out.println(
+//				"Its " + 
+//				LocalDate.now().getDayOfWeek().name().toLowerCase() +
+//				" the " +
+//				LocalDate.now().getDayOfMonth() +
+//				". of " +
+//				LocalDate.now().getMonth() +
+//				"\n"
+//				);
+		
+		System.out.println("Welcome");
 	}
 }

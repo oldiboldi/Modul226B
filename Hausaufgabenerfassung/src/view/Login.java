@@ -1,59 +1,83 @@
-package Main;
+package view;
 
 import java.util.Scanner;
 
+import model.MenuHub;
+import model.StudentUser;
+import model.TeacherUser;
+import db.StudentDB;
+import db.TeacherDB;
+
 /**
- * Author: Antonio Mazzone
- * Version: 1.0
+ * Author: Antonio Mazzone Version: 1.0
  * 
- * Dies ist die Anmeldemaske.
- * **/
+ * Dies ist die Anmeldemaske. Es unterscheidet ein Student(stu-) von einem
+ * Lehrer(tut-)
+ **/
 public class Login {
 
-	private UserDB db = new UserDB();
+	private StudentDB studentDB = new StudentDB();
+	private TeacherDB teacherDB = new TeacherDB();
+	private MenuHub hub = new MenuHub();
 	private Scanner sc = new Scanner(System.in);
 
-	public Login(boolean isAdmin) {
-		logIn(isAdmin);
+	public Login() {
+		logIn();
 	}
 
-	private void logIn(boolean isAdmin) {
+	private void logIn() {
 		System.out.print("Username: ");
 		String inputUsername = sc.nextLine();
 
-		if (db.containsUser(inputUsername)) {
+		if (inputUsername.startsWith("stu-")) {
+			if (studentDB.containsUser(inputUsername)) {
+				System.out.println("Password: ");
+				String inputPassword = sc.nextLine();
+				StudentUser loginUser = (StudentUser) studentDB.getUser(inputUsername);
 
-			if (isAdmin) {
-				new UserMenu(inputUsername, isAdmin);
-			}
-
-			else {
-
-				String inputPassword = k.readPassword("Password: ");
-				String hashedPassword = "" + k.hashString(inputPassword);
-				if (db.checkPassword(inputUsername, hashedPassword)) {
-					k.clearConsole();
-					if (inputUsername.equals("admin")) {
-						new AdminMenu();
-					} else {
-						new UserMenu(inputUsername, isAdmin);
-					}
+				if (inputPassword.equals(loginUser.getPassword())) {
+					hub.studentHub(inputUsername);
 				}
 
 				else {
-					k.clearConsole();
-					System.err.println("Wrong password or username");
-					logIn(isAdmin);
+					System.out.println("Wrong username or password");
+					logIn();
+				}
+			}
+
+			else {
+				System.out.println("User don't exists");
+				logIn();
+			}
+		}
+
+		else if (inputUsername.startsWith("tut-")) {
+			if (teacherDB.containsUser(inputUsername)) {
+				System.out.println("Password: ");
+				String inputPassword = sc.nextLine();
+				TeacherUser loginUser = (TeacherUser) teacherDB.getUser(inputUsername);
+
+				if (inputPassword.equals(loginUser.getPassword())) {
+					hub.teacherHub(inputUsername);
 				}
 
+				else {
+					System.out.println("Wrong username or password");
+					logIn();
+				}
+			}
+
+			else {
+				System.out.println("User don't exists");
+				logIn();
 			}
 		}
 
 		else {
-			k.clearConsole();
-			System.err.println("This user doesn't exist.");
-			logIn(isAdmin);
+			System.out.println("User don't exists");
+			logIn();
 		}
+
 		sc.close();
 
 	}

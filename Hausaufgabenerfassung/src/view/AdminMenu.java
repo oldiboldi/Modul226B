@@ -1,4 +1,4 @@
-package view.Menu;
+package view;
 
 public class AdminMenu extends Menu implements MenuInterface{
 

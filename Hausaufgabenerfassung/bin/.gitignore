@@ -1,3 +1,4 @@
-/db/
-/model/
 /view/
+/viewmodel/
+/model/
+/db/
