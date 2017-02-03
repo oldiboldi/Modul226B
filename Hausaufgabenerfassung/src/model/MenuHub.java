@@ -129,28 +129,30 @@ public class MenuHub {
 
 				homeworkDB = new HomeworkDB(
 						classList.get(Menu.askWhatToDo() - 1));
-				switch (teacherMenu.showOptionsHomeWork()) {
-				// Case go back
-				case 0:
-
-					break;
-				// Case see homework
-				case 1:
-					Menu.showAllHomework(homeworkDB.getHomeworkList());
-					break;
-				// Case give homework
-				case 2:
-
-					String[] homeworkData = teacherMenu.setHomeWorkProperties();
-					homeworkDB.createHomework(homeworkData[0], homeworkData[1],
-							homeworkData[2]);
-					break;
-				// Case remove homework
-				case 3:
-
-					break;
-				}
 				iterator = false;
+				while (iterator == false) {
+					switch (teacherMenu.showOptionsHomeWork()) {
+					// Case go back
+					case 0:
+						iterator = true;
+						break;
+					// Case see homework
+					case 1:
+						Menu.showAllHomework(homeworkDB.getHomeworkList());
+						break;
+					// Case give homework
+					case 2:
+	
+						String[] homeworkData = teacherMenu.setHomeWorkProperties();
+						homeworkDB.createHomework(homeworkData[0], homeworkData[1],
+								homeworkData[2]);
+						break;
+					// Case remove homework
+					case 3:
+	
+						break;
+					}
+				}
 				while (iterator == false) {
 					switch (teacherMenu.showOptionsHomeWork()) {
 					// Case go back
