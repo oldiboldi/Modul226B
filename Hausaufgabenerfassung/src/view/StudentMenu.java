@@ -6,7 +6,6 @@ public class StudentMenu extends Menu implements MenuInterface{
 	
 	public StudentMenu(String username) {
 		this.username = username;
-		showOptionsStart();
 	}
 	
 	@Override

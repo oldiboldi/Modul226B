@@ -73,6 +73,20 @@ public class Login {
 			}
 		}
 
+		else if (inputUsername.equals("ADMIN")) {
+			System.out.println("Password: ");
+			String inputPassword = sc.nextLine();
+			if (inputPassword.equals("123456789")) {
+				hub.adminHub();
+			}
+
+			else {
+				System.out.println("User don't exists");
+				logIn();
+
+			}
+		}
+
 		else {
 			System.out.println("User don't exists");
 			logIn();

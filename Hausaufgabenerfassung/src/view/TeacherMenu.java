@@ -6,7 +6,6 @@ private String username;
 	
 	public TeacherMenu(String username) {
 		this.username = username;
-		showOptionsStart();
 	}
 
 	public int showOptionsStart() {
