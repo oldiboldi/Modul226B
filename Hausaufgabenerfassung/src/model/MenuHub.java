@@ -1,9 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+
 import view.AdminMenu;
 import view.Login;
+import view.Menu;
 import view.StudentMenu;
 import view.TeacherMenu;
+import db.HomeworkDB;
+import db.TeacherDB;
 
 public class MenuHub {
 	public void adminHub() {
@@ -86,16 +91,26 @@ public class MenuHub {
 	}
 
 	public void teacherHub(String username) {
+		TeacherDB teacherDB = new TeacherDB();
+		HomeworkDB homeworkDB;
 		TeacherMenu teacherMenu = new TeacherMenu(username);
+		TeacherUser t = (TeacherUser) teacherDB.getUser(username);
 		teacherMenu.welcomeMessageStart();
 		switch (teacherMenu.showOptionsStart()) {
 		// Case Logout
 		case 0:
-
+			new Login();
 			break;
 		// Case Choose class
 		case 1:
+			ArrayList<String> classList = t.getClasses();
+			int i = 1;
+			for (String c : classList) {
+				System.out.println("[" + i + "] " + c);
+				i++;
+			}
 
+			homeworkDB = new HomeworkDB(classList.get(Menu.askWhatToDo() - 1));
 			switch (teacherMenu.showOptionsHomeWork()) {
 			// Case go back
 			case 0:
@@ -103,11 +118,13 @@ public class MenuHub {
 				break;
 			// Case see homework
 			case 1:
-
+				Menu.showAllHomework(homeworkDB.getHomeworkList());
 				break;
 			// Case give homework
 			case 2:
-
+				
+				String[] homeworkData = teacherMenu.setHomeWorkProperties();
+				homeworkDB.createHomework(homeworkData[0], homeworkData[1], homeworkData[2]);
 				break;
 			// Case remove homework
 			case 3:
@@ -127,7 +144,7 @@ public class MenuHub {
 			break;
 		// Case see homework
 		case 1:
-			
+
 			break;
 		}
 	}

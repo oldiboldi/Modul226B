@@ -14,7 +14,7 @@ import model.User;
 /**
  * Author: Antonio Mazzone Version: 1.0
  * 
- * Die Datenbank, welche die Logindaten von .csv Files ausliest.
+ * Die Datenbank, welche die Logindaten vom stu-logins.csv Files ausliest.
  **/
 public class StudentDB extends Database {
 	
@@ -46,8 +46,8 @@ public class StudentDB extends Database {
 			while ((line = br.readLine()) != null) {
 
 				String[] userData = line.split(";");
-				// ID , Firstname, Lastname, Birthday, Password
-				StudentUser user = new StudentUser(userData[0], userData[1], userData[2], userData[3], userData[5]);
+				// ID , Firstname, Lastname, Birthday, Class, Username, Password
+				StudentUser user = new StudentUser(userData[0], userData[1], userData[2], userData[3], userData[4], userData[5],  userData[6]);
 				userList.add(user);
 			}
 
@@ -67,9 +67,9 @@ public class StudentDB extends Database {
 
 	}
 
-	public void createUser(String firstname, String lastname, String birthday, String password) {
+	public void createUser(String firstname, String lastname, String birthday, String classe, String username, String password) {
 		String id = getNewID();
-		StudentUser user = new StudentUser(id, firstname, lastname, birthday, password);
+		StudentUser user = new StudentUser(id, firstname, lastname, birthday, classe, username, password);
 		userList.add(user);
 
 		try {
@@ -97,13 +97,14 @@ public class StudentDB extends Database {
 
 	@Override
 	public User getUser(String username) {
-		StudentUser returnUser = new StudentUser("", "", "", "", "");
+		StudentUser returnUser = new StudentUser("", "", "", "", "","","");
 		for (User user : userList) {
 			if (username.equals(user.getUsername())) {
 				returnUser.setId(user.getId());
 				returnUser.setFirstname(user.getFirstname());
 				returnUser.setLastname(user.getLastname());
 				returnUser.setBirthday(user.getBirthday());
+				returnUser.setClasse(((StudentUser) user).getClasse());
 				returnUser.setUsername(user.getUsername());
 				returnUser.setPassword(user.getPassword());
 				break;
@@ -115,13 +116,14 @@ public class StudentDB extends Database {
 
 	@Override
 	public User getUserByID(String id) {
-		StudentUser returnUser = new StudentUser("", "", "", "", "");
+		StudentUser returnUser = new StudentUser("", "", "", "", "","","");
 		for (User user : userList) {
 			if (id.equals(user.getId())) {
 				returnUser.setId(user.getId());
 				returnUser.setFirstname(user.getFirstname());
 				returnUser.setLastname(user.getLastname());
 				returnUser.setBirthday(user.getBirthday());
+				returnUser.setClasse(((StudentUser) user).getClasse());
 				returnUser.setUsername(user.getUsername());
 				returnUser.setPassword(user.getPassword());
 				break;

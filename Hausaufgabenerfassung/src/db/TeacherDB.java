@@ -41,8 +41,8 @@ public class TeacherDB extends Database {
 			while ((line = br.readLine()) != null) {
 
 				String[] userData = line.split(";");
-				// ID , Firstname, Lastname, Birthday, Classes, Password
-				TeacherUser user = new TeacherUser(userData[0], userData[1], userData[2], userData[3], userData[4],
+				// ID , Firstname, Lastname, Birthday, Classes, Username, Password
+				TeacherUser user = new TeacherUser(userData[0], userData[1], userData[2], userData[3], userData[4], userData[5],
 						userData[6]);
 				userList.add(user);
 
@@ -66,7 +66,7 @@ public class TeacherDB extends Database {
 
 	@Override
 	public User getUser(String username) {
-		TeacherUser returnUser = new TeacherUser("", "", "", "", "", "");
+		TeacherUser returnUser = new TeacherUser("", "", "", "", "", "","");
 		for (User user : userList) {
 			if (username.equals(user.getUsername())) {
 				returnUser.setId(user.getId());

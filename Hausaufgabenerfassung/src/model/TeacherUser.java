@@ -6,12 +6,13 @@ public class TeacherUser extends User {
 
 	private ArrayList<String> classesList = new ArrayList<String>();
 
-	public TeacherUser(String id, String firstname, String lastname, String birthday, String classes, String password) {
+	public TeacherUser(String id, String firstname, String lastname,
+			String birthday, String classes, String username,String password) {
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.birthday = birthday;
-		this.username = "tut-" + (firstname + lastname).toLowerCase();
+		this.username = "tut-" + username;
 		this.password = password;
 		initClasses(classes);
 
@@ -20,7 +21,9 @@ public class TeacherUser extends User {
 	private void initClasses(String classes) {
 		String[] classArray = classes.split(",");
 		for (String c : classArray) {
-			classesList.add(c);
+			if (c != "") {
+				classesList.add(c);
+			}
 		}
 	}
 
