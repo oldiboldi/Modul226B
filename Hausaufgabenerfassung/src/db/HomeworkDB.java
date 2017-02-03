@@ -148,4 +148,10 @@ public class HomeworkDB {
 		id = "" + newIDInt;
 		return id;
 	}
+	
+	public void deleteHomework(int id) {
+		homeworkList.remove(id - 1);
+		refreshHomeworkFile();
+	}
+
 }

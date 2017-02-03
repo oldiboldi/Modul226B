@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class TeacherMenu extends Menu implements MenuInterface {
 
 	private String username;
+	private Scanner sc = new Scanner(System.in);
 
 	public TeacherMenu(String username) {
 		this.username = username;
@@ -22,8 +23,6 @@ public class TeacherMenu extends Menu implements MenuInterface {
 	}
 
 	public String[] setHomeWorkProperties() {
-		Scanner sc = new Scanner(System.in);
-
 		System.out.println("Subject: ");
 		String inputSubject = sc.nextLine();
 
@@ -37,6 +36,12 @@ public class TeacherMenu extends Menu implements MenuInterface {
 				inputDate };
 		return returnArray;
 
+	}
+	
+	public int getHomeworkToDelete() {
+		System.out.println("ID of Homework to delete: ");
+		int returnInt = sc.nextInt();
+		return returnInt;
 	}
 	
 }

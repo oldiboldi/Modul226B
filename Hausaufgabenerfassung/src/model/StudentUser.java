@@ -11,7 +11,7 @@ public class StudentUser extends User {
 		this.lastname = lastname;
 		this.birthday = birthday;
 		this.classe = classe;
-		this.username = "stu" + username;
+		this.username = "stu-" + username;
 		this.password = password;
 	}
 

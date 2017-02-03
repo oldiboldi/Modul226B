@@ -147,7 +147,8 @@ public class MenuHub {
 					break;
 				// Case remove homework
 				case 3:
-
+					int homeworkID = teacherMenu.getHomeworkToDelete();
+					homeworkDB.deleteHomework(homeworkID);
 					break;
 				}
 				iterator = false;
@@ -163,11 +164,14 @@ public class MenuHub {
 						break;
 					// Case give homework
 					case 2:
-
+						String[] homeworkData = teacherMenu.setHomeWorkProperties();
+						homeworkDB.createHomework(homeworkData[0], homeworkData[1],
+								homeworkData[2]);
 						break;
 					// Case remove homework
 					case 3:
-
+						int homeworkID = teacherMenu.getHomeworkToDelete();
+						homeworkDB.deleteHomework(homeworkID);
 						break;
 					}
 				}
@@ -192,6 +196,7 @@ public class MenuHub {
 				break;
 			// Case see homework
 			case 1:
+				Menu.showAllHomework(homeworkDB.getHomeworkList());
 				break;
 			}
 		} while (end == false);
