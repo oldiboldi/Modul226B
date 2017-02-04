@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import view.AdminMenu;
+import view.ErrorMessages;
 import view.Login;
 import view.Menu;
 import view.StudentMenu;
@@ -12,6 +13,7 @@ import db.StudentDB;
 import db.TeacherDB;
 
 public class MenuHub {
+	//This Method will be executed when a admin user logs in
 	public void adminHub() {
 		AdminMenu adminMenu = new AdminMenu();
 		boolean end = false;
@@ -103,6 +105,7 @@ public class MenuHub {
 		} while (end == false);
 	}
 
+	//This Method will be executed when a teacher user logs in
 	public void teacherHub(String username) {
 		TeacherDB teacherDB = new TeacherDB();
 		HomeworkDB homeworkDB;
@@ -130,29 +133,6 @@ public class MenuHub {
 				homeworkDB = new HomeworkDB(
 						classList.get(Menu.askWhatToDo() - 1));
 
-				switch (teacherMenu.showOptionsHomeWork()) {
-				// Case go back
-				case 0:
-
-					break;
-				// Case see homework
-				case 1:
-					Menu.showAllHomework(homeworkDB.getHomeworkList());
-					break;
-				// Case give homework
-				case 2:
-
-					String[] homeworkData = teacherMenu.setHomeWorkProperties();
-					homeworkDB.createHomework(homeworkData[0], homeworkData[1],
-							homeworkData[2]);
-					break;
-				// Case remove homework
-				case 3:
-					int homeworkID = teacherMenu.getHomeworkToDelete();
-					homeworkDB.deleteHomework(homeworkID);
-					break;
-				}
-
 				iterator = false;
 				while (iterator == false) {
 					switch (teacherMenu.showOptionsHomeWork()) {
@@ -173,30 +153,14 @@ public class MenuHub {
 						break;
 					// Case remove homework
 					case 3:
-	
-						break;
-					}
-				}
-				while (iterator == false) {
-					switch (teacherMenu.showOptionsHomeWork()) {
-					// Case go back
-					case 0:
-						iterator = true;
-						break;
-					// Case see homework
-					case 1:
-
-						break;
-					// Case give homework
-					case 2:
-						String[] homeworkData = teacherMenu.setHomeWorkProperties();
-						homeworkDB.createHomework(homeworkData[0], homeworkData[1],
-								homeworkData[2]);
-						break;
-					// Case remove homework
-					case 3:
 						int homeworkID = teacherMenu.getHomeworkToDelete();
-						homeworkDB.deleteHomework(homeworkID);
+						
+						try {
+							homeworkDB.deleteHomework(homeworkID);
+						}
+						catch(IndexOutOfBoundsException e) {
+							System.out.println("Your Item wasnt found");
+						}
 						break;
 					}
 				}
@@ -205,6 +169,7 @@ public class MenuHub {
 		} while (end == false);
 	}
 
+	//This Method will be executed when a student user logs in
 	public void studentHub(String username) {
 		StudentMenu studentMenu = new StudentMenu(username);
 		StudentDB studentDB = new StudentDB();
